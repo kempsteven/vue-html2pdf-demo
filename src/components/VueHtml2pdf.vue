@@ -71,6 +71,12 @@ export default {
 
 				let childrenHeight = 0
 
+				for (const children of parentElement.children) {
+					console.log(children)
+				}
+				
+				return
+
 				/*
 					Loop through Elements and add there height with childrenHeight variable.
 					Once the childrenHeight is >= this.splitElementsByHeight, create a div with
@@ -80,6 +86,8 @@ export default {
 				ArrOfContentChildren.forEach((childElement, index) => {
 					// Get Element Height
 					const elementHeight = childElement.clientHeight
+
+					console.log(childElement)
 
 					// Get Computed Margin Top and Bottom
 					const elementComputedStyle = childElement.currentStyle || window.getComputedStyle(childElement)
@@ -160,7 +168,7 @@ export default {
 			}
 
 			// Download PDF
-			await html2pdf().from(element).set(opt).save()
+			// await html2pdf().from(element).set(opt).save()
 
 			this.progress = 100
 

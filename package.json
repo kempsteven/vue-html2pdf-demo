@@ -12,7 +12,7 @@
     "html2pdf.js": "^0.9.1",
     "vue": "^2.6.10",
     "vue-apexcharts": "^1.5.1",
-    "vue-html2pdf": "^1.0.0"
+    "vue-html2pdf": "^1.0.8"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",
