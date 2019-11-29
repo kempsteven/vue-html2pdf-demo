@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700');
+
+
+input, textarea {
+	&:required {
+        box-shadow: none;
+    }
+    &:invalid {
+        box-shadow: none;
+    }
+
+    &:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 30px white inset !important;
+    }
+
+    &::placeholder {
+        color: #bbbbbb;
+	}
+	
+	&:focus {
+		outline-style: none;
+	}
+}
+
+* {
+    margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Lato', sans-serif;
+    color: #4A4C50;
+	word-break: break-word;
+    word-wrap: break-word;
+    text-align: left;
+
+    &::-webkit-scrollbar-track { 
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar {  
+        width: 5px;
+        height: 5px;
+        background-color: #979CAC;
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb { 
+        border-radius: 10px;
+        background-color: #979CAC;
+    }
+}
+
+@keyframes animate-fade-in-top{
+    from{
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@mixin fadeintop($duration, $delay){
+    animation-name: animate-fade-in-top;
+    animation-duration: $duration;
+    animation-delay: $delay;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+}
