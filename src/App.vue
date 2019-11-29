@@ -55,7 +55,6 @@
 </template>
 
 <script>
-// import VueHtml2pdf from '@/components/VueHtml2pdf'
 import PdfContent from '@/components/PdfContent'
 import VueHtml2pdf from 'vue-html2pdf'
 export default {
