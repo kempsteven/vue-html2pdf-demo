@@ -187,12 +187,8 @@ export default {
 
     .report-info {
         display: flex;
-        padding-bottom: 15px;
         padding: 20px;
-
-        &:not(:last-child) {
-            margin-bottom: 15px;
-        }
+        padding-bottom: 0px;
 
         .image-container {
             width: 75px;
@@ -240,8 +236,9 @@ export default {
 
     .chart-container {
         width: 100%;
-        height: 350px;
+        height: 320px;
         padding: 20px;
+        pointer-events: none;
 
         &:not(:last-child) {
             margin-bottom: 15px;
