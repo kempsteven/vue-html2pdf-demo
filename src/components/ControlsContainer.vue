@@ -66,7 +66,7 @@
                 />
             </div>
 
-            <section class="generating-label" v-if="progress === 0">
+            <section class="generating-label" v-if="progress !== 0">
                 <span class="label-title">
                     {{ progress === 100 ? 'PDF Generated' : 'Generating PDF' }}
                 </span>
