@@ -36,7 +36,7 @@
 		</section>
 
 		<vue-html2pdf
-			:show-layout="true"
+			:show-layout="false"
 			:split-elements-by-height="1200"
 			filename="Axe Report"
 			:pdf-quality="2"
