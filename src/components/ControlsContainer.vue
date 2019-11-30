@@ -211,7 +211,7 @@ export default {
                 cursor: pointer;
             }
 
-            .input-text {
+            .input-box {
                 flex: 1 1 auto;
                 padding: 5px;
                 border-radius: 3px;
