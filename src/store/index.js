@@ -9,7 +9,7 @@ export default new Vuex.Store({
         controlValue: {
             showLayout: false,
             previewInNewtab: true,
-            splitElementsByHeight: 1400,
+            paginateElementsByHeight: 1400,
             filename: 'Hee Hee',
             pdfQuality: 2,
             pdfFormat: 'a4'

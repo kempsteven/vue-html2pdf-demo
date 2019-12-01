@@ -1,10 +1,15 @@
 <template>
-    <div class="generate-img" :class="{ 'show-layout' : showLayout }">
+    <div
+		class="generate-img"
+		:class="{
+			'show-layout' : showLayout
+		}"
+	>
 		<button class="btn" @click="generatePdf()">
 			Download File
 		</button>
 
-		<section class="content-wrapper" ref="pdfContent">
+		<section class="content-wrapper" ref="pdfContent" :key="paginateElementsByHeight">
 			<slot name="pdf-content"/>
 		</section>
     </div>
@@ -24,7 +29,7 @@ export default {
 			default: false
 		},
 
-		splitElementsByHeight: {
+		paginateElementsByHeight: {
 			type: Number,
 			default: 0,
 			required: true
@@ -55,19 +60,27 @@ export default {
 	watch: {
 		progress (val) {
 			this.$emit('progress', val)
+		},
+
+		paginateElementsByHeight () {
+			this.resetPagination()
 		}
 	},
 
 	methods: {
+		resetPagination () {
+			
+		},
+
 		generatePdf () {
 			this.$emit('hasStartedDownload')
 
 			this.progress = 0
 			
-			this.addPageBreakBySplitElementsByHeight()
+			this.paginationOfElements()
 		},
 
-		addPageBreakBySplitElementsByHeight () {
+		paginationOfElements () {
 			this.progress = 25
 
 			if (!this.hasAlreadyParsed) {
@@ -78,7 +91,7 @@ export default {
 
 				/*
 					Loop through Elements and add there height with childrenHeight variable.
-					Once the childrenHeight is >= this.splitElementsByHeight, create a div with
+					Once the childrenHeight is >= this.paginateElementsByHeight, create a div with
 					a class named 'html2pdf__page-break' and insert the element before the element
 					that will be in the next page
 				*/
@@ -93,7 +106,7 @@ export default {
 					// Add Both Element Height with the Elements Margin Top and Bottom
 					const elementHeightWithMargin = elementHeight + elementMarginTopBottom
 
-					if ((childrenHeight + elementHeight) < this.splitElementsByHeight) {
+					if ((childrenHeight + elementHeight) < this.paginateElementsByHeight) {
 						childrenHeight += elementHeightWithMargin
 					} else {
 						const section = document.createElement('div')
@@ -167,6 +180,7 @@ export default {
 
 			if (this.previewInNewtab) {
 				const pdfBlobUrl = await html2pdf().set(opt).from(element).output('bloburl')
+
 				this.openInNewTab(pdfBlobUrl)
 			} else {
 				// Download PDF
