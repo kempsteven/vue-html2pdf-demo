@@ -160,7 +160,9 @@ export default {
             }
 
             if (inputType === 'number') {
-                value = parseInt(e.target.checked)
+                value = e.target.value
+                            ? parseFloat(e.target.value)
+                            : 0
             }
 
             this.$set(this.controlValue, key, value)
