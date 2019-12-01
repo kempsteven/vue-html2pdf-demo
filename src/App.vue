@@ -1,8 +1,10 @@
 <template>
 	<div id="app">
-		<h1 class="title-header">
-			Vue HTML2PDF
-		</h1>
+		<section class="title-container">
+			<h1 class="title-header">
+				Vue HTML2PDF
+			</h1>
+		</section>
 
 		<controls-container
 			:progress="progress"
@@ -11,6 +13,7 @@
 
 		<vue-html2pdf
 			:show-layout="controlValue.showLayout"
+			:preview-in-newtab="controlValue.previewInNewtab"
 			:split-elements-by-height="controlValue.splitElementsByHeight"
 			:filename="controlValue.filename"
 			:pdf-quality="controlValue.pdfQuality"
@@ -30,8 +33,9 @@
 
 <script>
 import PdfContent from '@/components/PdfContent'
+import VueHtml2pdf from '@/components/VueHtml2pdf'
 import ControlsContainer from '@/components/ControlsContainer'
-import VueHtml2pdf from 'vue-html2pdf'
+// import VueHtml2pdf from 'vue-html2pdf'
 import { mapFields } from 'vuex-map-fields'
 
 export default {
@@ -121,9 +125,9 @@ export default {
 <style lang="scss">
 html, body {
 	width: 100%;
-	height: 100%;
 	padding: 0;
 	margin: 0;
+	
 }
 
 #app {
@@ -132,12 +136,23 @@ html, body {
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
 	color: #2c3e50;
-	height: 100%;
 	width: 100%;
+	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background: #141414;
+	flex-direction: column;
+	overflow: hidden;
+
+	.title-container {
+		min-height: 100vh;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-shrink: 0;
+	}
 
 	.title-header {
 		color: #fff;

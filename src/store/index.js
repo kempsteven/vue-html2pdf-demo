@@ -8,6 +8,7 @@ export default new Vuex.Store({
     state: {
         controlValue: {
             showLayout: false,
+            previewInNewtab: true,
             splitElementsByHeight: 1400,
             filename: 'Hee Hee',
             pdfQuality: 2,

@@ -4,52 +4,54 @@
             Component Props Controls
         </h3>
 
-        <section
-            class="control-item"
-            v-for="(control, key) in controls"
-            :key="key"
-        >
-            <section class="control">
-                <span class="item-label">
-                    {{ control.label }}
-                </span>
-
-                <input
-                    :class="
-                        control.inputType === 'checkbox'
-                            ? 'input-checkbox'
-                            : 'input-box'
-                    "
-                    :type="control.inputType"
-                    :value="controlValue[control.vModel]"
-                    :checked="controlValue[control.vModel]"
-                    @input="setInput(
-                        $event,
-                        control.vModel,
-                        control.inputType === 'checkbox'
-                    )"
-                >
-            </section>
-
-            <section class="options-container">
-                <section class="options-item">
-                    <span class="options-title">
-                        Type:
+        <section class="item-container">
+            <section
+                class="control-item"
+                v-for="(control, key) in controls"
+                :key="key"
+            >
+                <section class="control">
+                    <span class="item-label">
+                        {{ control.label }}
                     </span>
 
-                    <span class="options-value">
-                        {{ control.type }}
-                    </span>
+                    <input
+                        :class="
+                            control.inputType === 'checkbox'
+                                ? 'input-checkbox'
+                                : 'input-box'
+                        "
+                        :type="control.inputType"
+                        :value="controlValue[control.vModel]"
+                        :checked="controlValue[control.vModel]"
+                        @input="setInput(
+                            $event,
+                            control.vModel,
+                            control.inputType
+                        )"
+                    >
                 </section>
 
-                <section class="options-item">
-                    <span class="options-title">
-                        Options:
-                    </span>
+                <section class="options-container">
+                    <section class="options-item">
+                        <span class="options-title">
+                            Type:
+                        </span>
 
-                    <span class="options-value">
-                        {{ control.options }}
-                    </span>
+                        <span class="options-value">
+                            {{ control.type }}
+                        </span>
+                    </section>
+
+                    <section class="options-item">
+                        <span class="options-title">
+                            Options:
+                        </span>
+
+                        <span class="options-value">
+                            {{ control.options }}
+                        </span>
+                    </section>
                 </section>
             </section>
         </section>
@@ -100,6 +102,14 @@ export default {
                     inputType: 'checkbox',
                     vModel: 'showLayout'
                 },
+
+                {
+					label: 'preview-in-newtab:',
+					type: 'Boolean',
+                    options: 'true, false',
+                    inputType: 'checkbox',
+                    vModel: 'previewInNewtab'
+                },
                 
                 {
 					label: 'split-elements-by-height:',
@@ -142,14 +152,18 @@ export default {
     },
 
     methods: {
-        setInput (e, key, isCheckbox) {
-            this.$set(
-                this.controlValue,
-                key,
-                isCheckbox
-                    ? e.target.checked
-                    : e.target.value
-            )
+        setInput (e, key, inputType) {
+            let value = e.target.value
+
+            if (inputType === 'checkbox') {
+                value = e.target.checked
+            }
+
+            if (inputType === 'number') {
+                value = parseInt(e.target.checked)
+            }
+
+            this.$set(this.controlValue, key, value)
         }
     },
 }
@@ -169,6 +183,7 @@ export default {
     width: 405px;
     box-shadow: 5px 5px 10px #000000;
     opacity: 0;
+    max-height: calc(100vh - 50px);
     @include fadeintop(0.3s, 0.2s);
 
     .control-header {
@@ -177,66 +192,72 @@ export default {
         border-bottom: 1px solid #ccc;
     }
 
-    .control-item {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+    .item-container {
+        flex: 1 1 auto;
+        overflow: auto;
+        margin-bottom: 10px;
 
-        &:not(:last-child) {
-            margin-bottom: 10px;
-        }
-
-        .control {
+        .control-item {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid #ccc;
-            width: 100%;
+            flex-wrap: wrap;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
 
-            .item-label  {
-                margin-right: 15px;
-                display: block;
-                padding-bottom: 3px;
-                font-weight: 600;
-                flex-shrink: 0;
+            &:not(:last-child) {
+                margin-bottom: 10px;
             }
 
-            .input-checkbox {
-                width: 20px;
-                height: 20px;
-                cursor: pointer;
-            }
+            .control {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+                padding-bottom: 5px;
+                border-bottom: 1px solid #ccc;
+                width: 100%;
 
-            .input-box {
-                flex: 1 1 auto;
-                padding: 5px;
-                border-radius: 3px;
-                border: 1px solid #bbb;
-            }
-        }
-
-        .options-container {
-            width: 100%;
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-
-            .options-item {
-                &:not(:last-child) {
-                    margin-bottom: 5px;
-                }
-
-                .options-title {
-                    margin-right: 10px;
+                .item-label  {
+                    margin-right: 15px;
+                    display: block;
+                    padding-bottom: 3px;
                     font-weight: 600;
+                    flex-shrink: 0;
                 }
 
-                .options-value {
-                    color: #3574b3;
+                .input-checkbox {
+                    width: 20px;
+                    height: 20px;
+                    cursor: pointer;
+                }
+
+                .input-box {
+                    flex: 1 1 auto;
+                    padding: 5px;
+                    border-radius: 3px;
+                    border: 1px solid #bbb;
+                }
+            }
+
+            .options-container {
+                width: 100%;
+                flex-shrink: 0;
+                display: flex;
+                flex-direction: column;
+
+                .options-item {
+                    &:not(:last-child) {
+                        margin-bottom: 5px;
+                    }
+
+                    .options-title {
+                        margin-right: 10px;
+                        font-weight: 600;
+                    }
+
+                    .options-value {
+                        color: #3574b3;
+                    }
                 }
             }
         }
@@ -251,6 +272,7 @@ export default {
         transition: 0.3s;
         text-align: center;
         cursor: pointer;
+        position: sticky;
 
         &:disabled {
             opacity: 0.5;
