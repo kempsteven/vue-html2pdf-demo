@@ -14,7 +14,7 @@
 		<vue-html2pdf
 			:show-layout="controlValue.showLayout"
 			:preview-in-newtab="controlValue.previewInNewtab"
-			:split-elements-by-height="controlValue.splitElementsByHeight"
+			:paginate-elements-by-height="controlValue.paginateElementsByHeight"
 			:filename="controlValue.filename"
 			:pdf-quality="controlValue.pdfQuality"
 			:pdf-format="controlValue.pdfFormat"
@@ -71,9 +71,9 @@ export default {
 				return false
 			}
 
-			if (!this.controlValue.splitElementsByHeight) {
-				alert('split-elements-by-height value cannot be empty')
-				this.controlValue.splitElementsByHeight = 1400
+			if (!this.controlValue.paginateElementsByHeight) {
+				alert('paginate-elements-by-height value cannot be empty')
+				this.controlValue.paginateElementsByHeight = 1400
 				
 				return false
 			}
