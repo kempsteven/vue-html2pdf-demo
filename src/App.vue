@@ -19,8 +19,8 @@
 			:pdf-quality="controlValue.pdfQuality"
 			:pdf-format="controlValue.pdfFormat"
 			@progress="onProgress($event)"
-			@hasStartedDownload="hasStartedDownload()"
-			@hasDownloaded="hasDownloaded()"
+			@hasStartedGeneration="hasStartedGeneration()"
+			@hasGenerated="hasGenerated()"
 			ref="html2Pdf"
 		>
 			<pdf-content
@@ -99,11 +99,11 @@ export default {
 			console.log(`PDF generation progress: ${progress}%`)
 		},
 
-		hasStartedDownload () {
+		hasStartedGeneration () {
 			console.log(`PDF has started generation`)
 		},
 
-		hasDownloaded () {
+		hasGenerated () {
 			this.pdfDownloaded = true
 			console.log(`PDF has downloaded yehey`)
 		},
