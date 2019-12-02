@@ -56,8 +56,12 @@
             </section>
         </section>
 
-        <button class="generate-btn" @click="$emit('generateReport')">
-            Generate PDF
+        <button
+            :disabled="isGenerating"
+            class="generate-btn"
+            @click="$emit('generateReport')"
+        >
+            {{ isGenerating ? 'Loading...' : 'Generate PDF' }}
         </button>
 
         <section class="progress-container">
@@ -112,11 +116,11 @@ export default {
                 },
                 
                 {
-					label: 'split-elements-by-height:',
+					label: 'paginate-elements-by-height:',
 					type: 'Number',
                     options: 'Any Number',
                     inputType: 'number',
-                    vModel: 'splitElementsByHeight'
+                    vModel: 'paginateElementsByHeight'
                 },
                 
                 {
@@ -149,6 +153,10 @@ export default {
         ...mapFields([
             'controlValue'
         ]),
+
+        isGenerating () {
+            return this.progress !== 0 && this.progress !== 100
+        }
     },
 
     methods: {
@@ -160,7 +168,9 @@ export default {
             }
 
             if (inputType === 'number') {
-                value = parseInt(e.target.checked)
+                value = e.target.value
+                            ? parseFloat(e.target.value)
+                            : 0
             }
 
             this.$set(this.controlValue, key, value)
@@ -236,6 +246,7 @@ export default {
                     padding: 5px;
                     border-radius: 3px;
                     border: 1px solid #bbb;
+                    width: 0;
                 }
             }
 
