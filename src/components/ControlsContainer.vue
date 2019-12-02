@@ -56,8 +56,12 @@
             </section>
         </section>
 
-        <button class="generate-btn" @click="$emit('generateReport')">
-            Generate PDF
+        <button
+            :disabled="isGenerating"
+            class="generate-btn"
+            @click="$emit('generateReport')"
+        >
+            {{ isGenerating ? 'Loading...' : 'Generate PDF' }}
         </button>
 
         <section class="progress-container">
@@ -149,6 +153,10 @@ export default {
         ...mapFields([
             'controlValue'
         ]),
+
+        isGenerating () {
+            return this.progress !== 0 && this.progress !== 100
+        }
     },
 
     methods: {
@@ -165,11 +173,7 @@ export default {
                             : 0
             }
 
-            clearTimeout(this.timeout)
-
-			this.timeout = setTimeout(() => {
-                this.$set(this.controlValue, key, value)
-			}, 500)
+            this.$set(this.controlValue, key, value)
         }
     },
 }
