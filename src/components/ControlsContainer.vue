@@ -299,7 +299,7 @@ export default {
 
     .progress-container {
         width: 100%;
-        margin-top: 25px;
+        margin-top: 10px;
 
         .progress-bar {
             width: 100%;
