@@ -24,7 +24,14 @@
                         :type="control.inputType"
                         :value="controlValue[control.vModel]"
                         :checked="controlValue[control.vModel]"
+
                         @input="setInput(
+                            $event,
+                            control.vModel,
+                            control.inputType
+                        )"
+
+                        @change="setInput(
                             $event,
                             control.vModel,
                             control.inputType
