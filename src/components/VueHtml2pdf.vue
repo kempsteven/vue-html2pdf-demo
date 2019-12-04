@@ -1,13 +1,29 @@
 <template>
-    <div
-		class="generate-img"
-		:class="{
-			'show-layout' : showLayout
-		}"
-	>
-		<section class="content-wrapper" ref="pdfContent">
-			<slot name="pdf-content"/>
+    <div class="vue-html2pdf">
+		<section
+			class="layout-container"
+			:class="{
+				'show-layout' : showLayout
+			}"
+		>
+			<section class="content-wrapper" ref="pdfContent">
+				<slot name="pdf-content"/>
+			</section>
 		</section>
+
+		<transition name="transition-anim">
+			<section class="pdf-preview" v-if="pdfFile">
+				<button @click.self="closePreview()">
+					&times;
+				</button>
+
+				<iframe
+					:src="pdfFile"
+					width="100%"
+					height="100%"
+				/>
+			</section>
+		</transition>
     </div>
 </template>
 <script>
@@ -20,7 +36,7 @@ export default {
 			default: false
 		},
 
-		previewInNewtab: {
+		previewModal: {
 			type: Boolean,
 			default: false
 		},
@@ -50,7 +66,8 @@ export default {
 		return {
 			hasAlreadyParsed: false,
 			progress: 0,
-			pdfWindow: null
+			pdfWindow: null,
+			pdfFile: null
 		}
 	},
 
@@ -163,6 +180,7 @@ export default {
 		async downloadPdf () {
 			// Set Element and Html2pdf.js Options
 			const element = this.$refs.pdfContent
+			
 
 			const opt = {
 				margin: 0,
@@ -185,21 +203,24 @@ export default {
 				}
 			}
 
+			let pdfBlobUrl
+			if (this.previewModal) {
+				// this.setNewTab()
 
-			if (this.previewInNewtab) {
-				this.setNewTab()
+				pdfBlobUrl = await html2pdf().set(opt).from(element).output('bloburl')
+				this.pdfFile = pdfBlobUrl
 
-				const pdfBlobUrl = await html2pdf().set(opt).from(element).output('bloburl')
-
-				this.setPdfInNewTab(pdfBlobUrl)
 			} else {
 				// Download PDF
-				await html2pdf().set(opt).from(element).save()
+				pdfBlobUrl = await html2pdf().set(opt).from(element).save().output('bloburl')
 			}
+
+			const res = await fetch(pdfBlobUrl)
+			const blobFile = await res.blob()
 
 			this.progress = 100
 
-			this.$emit('hasDownloaded')
+			this.$emit('hasGenerated', blobFile)
 		},
 
 		setNewTab () {
@@ -299,28 +320,77 @@ export default {
 					src='${ pdfBlobUrl }'
 				></iframe>
 			`)
+		},
+
+		closePreview () {
+			this.pdfFile = null
 		}
 	}
 }
 </script>
 
 <style lang="scss" scoped>
-.generate-img {
-	position: fixed;
-	width: 100vw;
-	height: 100vh;
-	left: -100vw;
-	top: 0;
-	z-index: -9999;
-	background: rgba(95, 95, 95, 0.8);
-	display: flex;
-	justify-content: center;
-	align-items: flex-start;
-	overflow: auto;
+.vue-html2pdf {
+	.layout-container {
+		position: fixed;
+		width: 100vw;
+		height: 100vh;
+		left: -100vw;
+		top: 0;
+		z-index: -9999;
+		background: rgba(95, 95, 95, 0.8);
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		overflow: auto;
 
-	&.show-layout {
-		left: 0vw;
-		z-index: 9999;
+		&.show-layout {
+			left: 0vw;
+			z-index: 9999;
+		}
+	}
+
+	.pdf-preview {
+		position: fixed;
+		width: 65%;
+		min-width: 600px;
+		height: 80vh;
+		top: 100px;
+		z-index: 9999999;
+		left: 50%;
+		transform: translateX(-50%);
+		border-radius: 5px;
+		box-shadow: 0px 0px 10px #00000048;
+
+		button {
+			position: absolute;
+			top: -20px;
+			left: -15px;
+			width: 35px;
+			height: 35px;
+			background: #555;
+			border: 0;
+			box-shadow: 0px 0px 10px #00000048;
+			border-radius: 50%;
+			color: #fff;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 20px;
+			cursor: pointer;
+		}
+
+		iframe {
+			border: 0;
+		}
+	}
+
+	.transition-anim-enter-active, .transition-anim-leave-active {
+		transition: opacity 0.3s ease-in;
+	}
+
+	.transition-anim-enter, .transition-anim-leave-to{
+		opacity: 0;
 	}
 }
 </style>

@@ -115,11 +115,11 @@ export default {
                 },
 
                 {
-					label: 'preview-in-newtab:',
+					label: 'preview-modal:',
 					type: 'Boolean',
                     options: 'true, false',
                     inputType: 'checkbox',
-                    vModel: 'previewInNewtab'
+                    vModel: 'previewModal'
                 },
                 
                 {
@@ -290,7 +290,6 @@ export default {
         transition: 0.3s;
         text-align: center;
         cursor: pointer;
-        position: sticky;
 
         &:disabled {
             opacity: 0.5;

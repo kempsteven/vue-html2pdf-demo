@@ -13,14 +13,14 @@
 
 		<vue-html2pdf
 			:show-layout="controlValue.showLayout"
-			:preview-in-newtab="controlValue.previewInNewtab"
+			:preview-modal="controlValue.previewModal"
 			:paginate-elements-by-height="controlValue.paginateElementsByHeight"
 			:filename="controlValue.filename"
 			:pdf-quality="controlValue.pdfQuality"
 			:pdf-format="controlValue.pdfFormat"
 			@progress="onProgress($event)"
 			@hasStartedGeneration="hasStartedGeneration()"
-			@hasGenerated="hasGenerated()"
+			@hasGenerated="hasGenerated($event)"
 			ref="html2Pdf"
 		>
 			<pdf-content
@@ -103,14 +103,19 @@ export default {
 			console.log(`PDF has started generation`)
 		},
 
-		hasGenerated () {
+		hasGenerated (blobPdf) {
 			this.pdfDownloaded = true
 			console.log(`PDF has downloaded yehey`)
+			console.log(blobPdf)
 		},
 
 		domRendered () {
 			console.log('Dom Has Rendered')
 			this.contentRendered = true
+		},
+
+		onBlobGenerate (blob) {
+			console.log(blob)
 		}
 	},
 

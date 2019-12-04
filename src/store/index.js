@@ -8,7 +8,7 @@ export default new Vuex.Store({
     state: {
         controlValue: {
             showLayout: false,
-            previewInNewtab: true,
+            previewModal: true,
             paginateElementsByHeight: 1400,
             filename: 'Hee Hee',
             pdfQuality: 2,
