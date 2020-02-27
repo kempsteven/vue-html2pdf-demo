@@ -145,12 +145,29 @@ export default {
                     inputType: 'number',
                     vModel: 'pdfQuality'
                 },
+
                 {
 					label: 'pdf-format:',
 					type: 'String',
                     options: 'a0, a1, a2, a3, a4, letter, legal, a5, a6, a7, a8, a9, a10',
                     inputType: 'text',
                     vModel: 'pdfFormat'
+                },
+                
+                {
+					label: 'pdf-orientation:',
+					type: 'String',
+                    options: 'portrait, landscape',
+                    inputType: 'text',
+                    vModel: 'pdfOrientation'
+                },
+                
+                {
+					label: 'pdf-content-width:',
+					type: 'String',
+                    options: 'Any css sizes (e.g. "800px", "65vw", "70%")',
+                    inputType: 'text',
+                    vModel: 'pdfContentWidth'
 				},
             ],
         }
@@ -286,7 +303,7 @@ export default {
         padding: 15px 25px;
         border-radius: 5px;
         color: #fff;
-        background: #2c3e50;
+        background: #243B55;
         transition: 0.3s;
         text-align: center;
         cursor: pointer;

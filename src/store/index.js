@@ -12,7 +12,9 @@ export default new Vuex.Store({
             paginateElementsByHeight: 1400,
             filename: 'Hee Hee',
             pdfQuality: 2,
-            pdfFormat: 'a4'
+            pdfFormat: 'a4',
+            pdfOrientation: 'portrait',
+            pdfContentWidth: '800px'
         }
     },
 

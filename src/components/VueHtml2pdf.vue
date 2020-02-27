@@ -6,7 +6,11 @@
 				'show-layout' : showLayout
 			}"
 		>
-			<section class="content-wrapper" ref="pdfContent">
+			<section
+				class="content-wrapper"
+				:style="`width: ${pdfContentWidth};`"
+				ref="pdfContent"
+			>
 				<slot name="pdf-content"/>
 			</section>
 		</section>
@@ -59,6 +63,15 @@ export default {
 
 		pdfFormat: {
 			default: 'a4',
+		},
+
+		pdfOrientation: {
+			type: String,
+			default: 'portrait'
+		},
+
+		pdfContentWidth: {
+			default: '800px'
 		}
 	},
 
@@ -199,7 +212,7 @@ export default {
 				jsPDF: {
 					unit: 'in',
 					format: this.pdfFormat,
-					orientation: 'portrait'
+					orientation: this.pdfOrientation
 				}
 			}
 

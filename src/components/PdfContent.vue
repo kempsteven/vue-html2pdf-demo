@@ -12,7 +12,7 @@
 
             <section class="user-details">
                 <h4 class="user-name">
-                    Mogul Khan, The Axe
+                    Mogul Khan Touch This
                 </h4>
 
                 <span class="detail-container">
@@ -182,7 +182,7 @@ export default {
 
 <style lang="scss" scoped>
 .pdf-content {
-    width: 800px;
+    width: 100%;
     background: #fff;
 
     .report-info {

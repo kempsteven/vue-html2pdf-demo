@@ -18,6 +18,9 @@
 			:filename="controlValue.filename"
 			:pdf-quality="controlValue.pdfQuality"
 			:pdf-format="controlValue.pdfFormat"
+			:pdf-orientation="controlValue.pdfOrientation"
+			:pdf-content-width="controlValue.pdfContentWidth"
+
 			@progress="onProgress($event)"
 			@hasStartedGeneration="hasStartedGeneration()"
 			@hasGenerated="hasGenerated($event)"
@@ -91,6 +94,20 @@ export default {
 				return false
 			}
 
+			if (!this.controlValue.pdfOrientation) {
+				alert('pdf-orientation value cannot be empty')
+				this.controlValue.pdfOrientation = 'portrait'
+				
+				return false
+			}
+
+			if (!this.controlValue.pdfContentWidth) {
+				alert('pdf-content-width value cannot be empty')
+				this.controlValue.pdfContentWidth = '800px'
+				
+				return false
+			}
+
 			return true
 		},
 
@@ -146,7 +163,9 @@ html, body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: #141414;
+	background: #141E30;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 	flex-direction: column;
 	overflow: hidden;
 
