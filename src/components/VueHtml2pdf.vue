@@ -40,6 +40,11 @@ export default {
 			default: false
 		},
 
+		enableDownload: {
+			type: Boolean,
+			default: true
+		},
+
 		previewModal: {
 			type: Boolean,
 			default: false
@@ -124,7 +129,6 @@ export default {
 			if (!this.hasAlreadyParsed) {
 				const parentElement = this.$refs.pdfContent.firstChild
 				const ArrOfContentChildren = Array.from(parentElement.children)
-
 				let childrenHeight = 0
 
 				/*
@@ -216,15 +220,13 @@ export default {
 				}
 			}
 
-			let pdfBlobUrl
+			let pdfBlobUrl = await html2pdf().set(opt).from(element).output('bloburl')
+
 			if (this.previewModal) {
-				// this.setNewTab()
-
-				pdfBlobUrl = await html2pdf().set(opt).from(element).output('bloburl')
 				this.pdfFile = pdfBlobUrl
+			}
 
-			} else {
-				// Download PDF
+			if (this.enableDownload) {
 				pdfBlobUrl = await html2pdf().set(opt).from(element).save().output('bloburl')
 			}
 
@@ -234,105 +236,6 @@ export default {
 			this.progress = 100
 
 			this.$emit('hasGenerated', blobFile)
-		},
-
-		setNewTab () {
-			this.pdfWindow = window.open('', '_blank')
-
-			this.pdfWindow.document.write(`
-				<html>
-					<head>
-						<title>
-							Vue HTML2PDF - PDF Preview
-						</title>
-
-						<style>
-							@keyframes animate-rotate {
-								0% {
-									transform: rotate(0deg);
-								}
-
-								50% {
-									transform: rotate(180deg);
-									opacity: .35;
-								}
-
-								100% {
-									transform: rotate(360deg);
-								}   
-							}
-
-							@keyframes appear {
-								0% {
-									opacity: 0;
-								}
-
-								100% {
-									opacity: 1;
-								}   
-							}
-
-							body {
-								margin: 0px;
-								display: flex;
-								justify-content: center;
-								align-items: center;
-								background: #555;
-								color: #fff;
-								overflow: hidden;
-								font-family: 'Avenir', Helvetica, Arial, sans-serif;
-							}
-
-							h3 {
-								margin: 0;
-								display: flex;
-								align-items: center;
-							}
-
-							h3 .loading {
-								border-radius: 50%;
-								width: 27px;
-								height: 27px;
-								border-top: 10px solid rgba(131, 220, 202,0.1);
-								border-right: 10px solid rgba(131, 220, 202,0.3);
-								border-bottom: 10px solid rgba(131, 220, 202,0.5);
-								border-left: 10px solid rgba(131, 220, 202,0.8);;
-								animation: animate-rotate infinite linear 1s;
-								margin-right: 15px;
-							}
-
-							iframe {
-								width: 100vw;
-								height: 100vh;
-								border: 0;
-								opacity: 0;
-								animation: appear 0.5s forwards 0.4s;
-							}
-						</style>
-					</head>
-
-					<body>
-						<h3>
-							<div class="loading"></div>
-
-							Preview Loading ...
-						</h3>
-					</body>
-				</html>
-			`)
-		},
-
-		setPdfInNewTab (pdfBlobUrl) {
-			// Remove Loading Label
-			this.pdfWindow.document.getElementsByTagName("h3")[0].remove()
-
-			this.pdfWindow.document.write(`
-				<iframe
-					width='100%'
-					height='100%'
-					src='${ pdfBlobUrl }'
-				></iframe>
-			`)
 		},
 
 		closePreview () {

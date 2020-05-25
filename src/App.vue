@@ -13,6 +13,7 @@
 
 		<vue-html2pdf
 			:show-layout="controlValue.showLayout"
+			:enable-download="controlValue.enableDownload"
 			:preview-modal="controlValue.previewModal"
 			:paginate-elements-by-height="controlValue.paginateElementsByHeight"
 			:filename="controlValue.filename"

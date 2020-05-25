@@ -115,6 +115,14 @@ export default {
                 },
 
                 {
+					label: 'enable-download:',
+					type: 'Boolean',
+                    options: 'true, false',
+                    inputType: 'checkbox',
+                    vModel: 'enableDownload'
+                },
+
+                {
 					label: 'preview-modal:',
 					type: 'Boolean',
                     options: 'true, false',
