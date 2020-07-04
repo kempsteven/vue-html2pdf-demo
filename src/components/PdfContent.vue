@@ -4,7 +4,7 @@
             <section class="image-container">
                 <img
                     class="user-image"
-                    :src="require('@/assets/axe.jpg')"
+                    src="https://i.imgur.com/wKblc.jpg"
                     alt="User Image"
 					ref="userImage"
                 >

@@ -39,7 +39,8 @@
 import PdfContent from '@/components/PdfContent'
 // import VueHtml2pdf from '@/components/VueHtml2pdf'
 import ControlsContainer from '@/components/ControlsContainer'
-import VueHtml2pdf from 'vue-html2pdf'
+// import VueHtml2pdf from 'vue-html2pdf'
+import VueHtml2pdf from 'vue-html2pdf-test'
 import { mapFields } from 'vuex-map-fields'
 
 export default {
@@ -50,7 +51,29 @@ export default {
 			contentRendered: false,
 			progress: 0,
 			generatingPdf: false,
-			pdfDownloaded: false
+			pdfDownloaded: false,
+
+			htmlToPdfOptions: {
+				margin: 0,
+
+				filename: `HAHAHA.pdf`,
+
+				image: {
+					type: 'jpeg', 
+					quality: 0.98
+				},
+
+				html2canvas: {
+					scale: 1,
+					useCORS: true
+				},
+
+				jsPDF: {
+					unit: 'in',
+					format: 'a4',
+					orientation: 'portrait'
+				}
+			}
 		}
 	},
 
@@ -150,7 +173,6 @@ html, body {
 	width: 100%;
 	padding: 0;
 	margin: 0;
-	
 }
 
 #app {
@@ -165,8 +187,8 @@ html, body {
 	justify-content: center;
 	align-items: center;
 	background: #141E30;  /* fallback for old browsers */
-	background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: -webkit-linear-gradient(to bottom, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to bottom, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 	flex-direction: column;
 	overflow: hidden;
 

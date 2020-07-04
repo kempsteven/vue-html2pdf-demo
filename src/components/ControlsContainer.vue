@@ -61,6 +61,16 @@
                     </section>
                 </section>
             </section>
+
+            <div>
+                <b>Note:</b> <br> There is a prop called <b>html-to-pdf-options</b>, if you set a value to
+                this prop, the props below will be overridden: <br><br>
+                <b>filename</b><br>
+                <b>pdf-quality</b><br>
+                <b>pdf-format</b><br>
+                <b>pdf-orientation</b>.<br><br>
+                Any value inputed to those props above will have no effect.
+            </div>
         </section>
 
         <button
