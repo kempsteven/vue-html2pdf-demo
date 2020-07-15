@@ -60,6 +60,13 @@
                         </span>
                     </section>
                 </section>
+
+                <section v-if="control.label === 'is-manual-pagination:'">
+                    <b>Note:</b> <br>
+                    When enabling this prop, the prop <br> <b> paginate-elements-by-height </b> will not be used.
+                    Instead the pagination process will rely on the elements with a class "html2pdf__page-break"
+                    to know where to page break.
+                </section>
             </section>
 
             <div>
@@ -138,6 +145,14 @@ export default {
                     options: 'true, false',
                     inputType: 'checkbox',
                     vModel: 'previewModal'
+                },
+
+                {
+					label: 'is-manual-pagination:',
+					type: 'Boolean',
+                    options: 'true, false',
+                    inputType: 'checkbox',
+                    vModel: 'isManualPagination'
                 },
                 
                 {

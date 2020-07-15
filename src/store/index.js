@@ -11,6 +11,7 @@ export default new Vuex.Store({
             enableDownload: true,
             previewModal: true,
             paginateElementsByHeight: 1200,
+            isManualPagination: false,
             filename: 'Hee Hee',
             pdfQuality: 2,
             pdfFormat: 'a4',

@@ -21,6 +21,7 @@
 			:pdf-format="controlValue.pdfFormat"
 			:pdf-orientation="controlValue.pdfOrientation"
 			:pdf-content-width="controlValue.pdfContentWidth"
+			:is-manual-pagination="controlValue.isManualPagination"
 
 			@progress="onProgress($event)"
 			@hasStartedGeneration="hasStartedGeneration()"

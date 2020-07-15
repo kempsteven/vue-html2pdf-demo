@@ -33,6 +33,8 @@
             </section>
         </section>
 
+        <div class="html2pdf__page-break"/>
+
         <section class="chart-container" v-for="(val, key) in 10" :key="key">
             <h4 class="time">
                 November 11, 2019 1:00 PM - 2:23 PM
