@@ -83,7 +83,7 @@ export default {
 			type: Object
 		},
 
-		isManualPagination: {
+		manualPagination: {
 			type: Boolean,
 			default: false
 		}
@@ -139,7 +139,7 @@ export default {
 				Instead the pagination process will rely on the elements with a class "html2pdf__page-break"
 				to know where to page break, that is automatically done by html2pdf.js
 			*/
-			if (this.isManualPagination) {
+			if (this.manualPagination) {
 				this.progress = 70
 				this.downloadPdf()
 				return
