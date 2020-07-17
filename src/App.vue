@@ -15,8 +15,8 @@
 			:show-layout="controlValue.showLayout"
 			:enable-download="controlValue.enableDownload"
 			:preview-modal="controlValue.previewModal"
-			:paginate-elements-by-height="controlValue.paginateElementsByHeight"
 			:filename="controlValue.filename"
+			:paginate-elements-by-height="controlValue.paginateElementsByHeight"
 			:pdf-quality="controlValue.pdfQuality"
 			:pdf-format="controlValue.pdfFormat"
 			:pdf-orientation="controlValue.pdfOrientation"
@@ -38,9 +38,9 @@
 
 <script>
 import PdfContent from '@/components/PdfContent'
-// import VueHtml2pdf from '@/components/VueHtml2pdf'
+import VueHtml2pdf from '@/components/VueHtml2pdf'
 import ControlsContainer from '@/components/ControlsContainer'
-import VueHtml2pdf from 'vue-html2pdf'
+// import VueHtml2pdf from 'vue-html2pdf'
 // import VueHtml2pdf from 'vue-html2pdf-test'
 import { mapFields } from 'vuex-map-fields'
 

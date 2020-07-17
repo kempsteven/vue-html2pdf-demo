@@ -30,7 +30,17 @@
 
 					November 11, 2019 1:00 PM - 2:23 PM
                 </span>
+
+                <span class="detail-container" >
+                    <span class="detail-label">
+						Game Replay Link:
+                    </span>
+
+					<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Game No. 3</a>
+                </span>
             </section>
+
+            
         </section>
 
         <div class="html2pdf__page-break"/>
