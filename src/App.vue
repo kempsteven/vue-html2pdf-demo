@@ -22,6 +22,7 @@
 			:pdf-orientation="controlValue.pdfOrientation"
 			:pdf-content-width="controlValue.pdfContentWidth"
 			:manual-pagination="controlValue.manualPagination"
+			:html-to-pdf-options="htmlToPdfOptions"
 
 			@progress="onProgress($event)"
 			@hasStartedGeneration="hasStartedGeneration()"
@@ -38,9 +39,9 @@
 
 <script>
 import PdfContent from '@/components/PdfContent'
-import VueHtml2pdf from '@/components/VueHtml2pdf'
+// import VueHtml2pdf from '@/components/VueHtml2pdf'
 import ControlsContainer from '@/components/ControlsContainer'
-// import VueHtml2pdf from 'vue-html2pdf'
+import VueHtml2pdf from 'vue-html2pdf'
 // import VueHtml2pdf from 'vue-html2pdf-test'
 import { mapFields } from 'vuex-map-fields'
 
@@ -53,35 +54,39 @@ export default {
 			progress: 0,
 			generatingPdf: false,
 			pdfDownloaded: false,
-
-			htmlToPdfOptions: {
-				margin: 0,
-
-				filename: `HAHAHA.pdf`,
-
-				image: {
-					type: 'jpeg', 
-					quality: 0.98
-				},
-
-				html2canvas: {
-					scale: 1,
-					useCORS: true
-				},
-
-				jsPDF: {
-					unit: 'in',
-					format: 'a4',
-					orientation: 'portrait'
-				}
-			}
 		}
 	},
 
 	computed: {
         ...mapFields([
             'controlValue'
-        ]),
+		]),
+		
+		htmlToPdfOptions () {
+			return {
+				margin: 0,
+
+				filename: 'hehe.pdf',
+
+				image: {
+					type: 'jpeg', 
+					quality: 0.98
+				},
+
+				enableLinks: true,
+
+				html2canvas: {
+					scale: this.controlValue.pdfQuality,
+					useCORS: true
+				},
+
+				jsPDF: {
+					unit: 'in',
+					format: this.controlValue.pdfFormat,
+					orientation: this.controlValue.pdfOrientation
+				}
+			}
+		}
     },
 
 	methods: {
