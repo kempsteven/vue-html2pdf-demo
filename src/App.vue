@@ -1,13 +1,8 @@
 <template>
   <div id="app">
-    <section class="title-container">
-      <h1 class="title-header">Vue HTML2PDF</h1>
-    </section>
-
-    <controls-container :progress="progress" @generateReport="downloadPdf()" />
-
     <vue-html2pdf
       :show-layout="controlValue.showLayout"
+      :float-layout="controlValue.floatLayout"
       :enable-download="controlValue.enableDownload"
       :preview-modal="controlValue.previewModal"
       :filename="controlValue.filename"
@@ -25,6 +20,12 @@
     >
       <pdf-content @domRendered="domRendered()" slot="pdf-content" />
     </vue-html2pdf>
+
+    <section class="title-container">
+      <h1 class="title-header">Vue HTML2PDF</h1>
+    </section>
+
+    <controls-container :progress="progress" @generateReport="downloadPdf()" />
   </div>
 </template>
 

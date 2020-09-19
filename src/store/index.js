@@ -8,6 +8,7 @@ export default new Vuex.Store({
     state: {
         controlValue: {
             showLayout: false,
+            floatLayout: true,
             enableDownload: true,
             previewModal: true,
             paginateElementsByHeight: 1100,

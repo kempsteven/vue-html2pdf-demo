@@ -132,6 +132,14 @@ export default {
                 },
 
                 {
+					label: 'float-layout:',
+					type: 'Boolean',
+                    options: 'true, false',
+                    inputType: 'checkbox',
+                    vModel: 'floatLayout'
+                },
+
+                {
 					label: 'enable-download:',
 					type: 'Boolean',
                     options: 'true, false',
