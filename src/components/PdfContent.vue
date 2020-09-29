@@ -31,11 +31,11 @@
       </section>
     </section>
 
-    <section class="chart-container" v-for="(val, key) in 10" :key="key">
+    <!-- <section class="chart-container" v-for="(val, key) in 10" :key="key">
       <h4 class="time">November 11, 2019 1:00 PM - 2:23 PM</h4>
 
       <apexchart type="area" height="100%" width="100%" :options="chartOptions" :series="series" />
-    </section>
+    </section> -->
   </section>
 </template>
 

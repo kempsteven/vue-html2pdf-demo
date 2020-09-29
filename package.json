@@ -9,7 +9,7 @@
   "dependencies": {
     "apexcharts": "^3.10.1",
     "core-js": "^3.4.7",
-    "html2pdf.js": "^0.9.1",
+    "html2pdf.js": "^0.9.2",
     "vue": "^2.6.10",
     "vue-apexcharts": "^1.5.1",
     "vue-html2pdf": "^1.7.3",

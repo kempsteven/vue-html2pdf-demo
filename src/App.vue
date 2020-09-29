@@ -13,8 +13,10 @@
       :pdf-content-width="controlValue.pdfContentWidth"
       :manual-pagination="controlValue.manualPagination"
       :html-to-pdf-options="htmlToPdfOptions"
-      @progress="onProgress($event)"
-      @hasStartedGeneration="hasStartedGeneration()"
+      @progress="progress($event)"
+      @startPagination="startPagination()"
+      @hasPaginated="hasPaginated()"
+      @beforeDownload="onBeforeDownload($event)"
       @hasGenerated="hasGenerated($event)"
       ref="html2Pdf"
     >
@@ -31,9 +33,9 @@
 
 <script>
 import PdfContent from "@/components/PdfContent";
-// import VueHtml2pdf from "@/components/VueHtml2pdf";
+import VueHtml2pdf from "@/components/VueHtml2pdf";
 import ControlsContainer from "@/components/ControlsContainer";
-import VueHtml2pdf from 'vue-html2pdf'
+// import VueHtml2pdf from 'vue-html2pdf'
 // import VueHtml2pdf from "vue-html2pdf-test";
 import { mapFields } from "vuex-map-fields";
 
@@ -56,7 +58,7 @@ export default {
       return {
         margin: 0,
 
-        filename: "hehe.pdf",
+        filename: "hee hee.pdf",
 
         image: {
           type: "jpeg",
@@ -143,17 +145,36 @@ export default {
 
     onProgress(progress) {
       this.progress = progress;
-      console.log(`PDF generation progress: ${progress}%`);
+      console.log(`PDF generation progress: ${progress}%`)
     },
 
-    hasStartedGeneration() {
-      console.log(`PDF has started generation`);
+    startPagination() {
+      console.log(`PDF has started pagination`)
+    },
+
+    hasPaginated () {
+      console.log(`PDF has been paginated`)
+    },
+
+    beforeGenerate ({ html2pdf, options, pdfContent }) {
+      console.log(`On Before PDF Generation`)
+      // let pdfBlobUrl = await html2pdf().set(options).from(element).toPdf().get('pdf').then((pdf) => {
+			// 	const totalPages = pdf.internal.getNumberOfPages()
+			// 	for (let i = 1; i <= totalPages; i++) {
+			// 		pdf.setPage(i)
+			// 		pdf.setFontSize(10)
+			// 		pdf.setTextColor(150)
+			// 		pdf.text('Page ' + i + ' of ' + totalPages, (pdf.internal.pageSize.getWidth() * 0.88), (pdf.internal.pageSize.getHeight() - 0.3))
+			// 	} 
+			// }).output('bloburl')
+
+			// this.pdfFile = pdfBlobUrl
     },
 
     hasGenerated(blobPdf) {
-      this.pdfDownloaded = true;
-      console.log(`PDF has downloaded yehey`);
-      console.log(blobPdf);
+      console.log(`PDF has downloaded yehey`)
+      this.pdfDownloaded = true
+      console.log(blobPdf)
     },
 
     domRendered() {
