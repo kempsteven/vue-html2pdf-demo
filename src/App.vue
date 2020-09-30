@@ -13,11 +13,11 @@
       :pdf-content-width="controlValue.pdfContentWidth"
       :manual-pagination="controlValue.manualPagination"
       :html-to-pdf-options="htmlToPdfOptions"
-      @progress="progress($event)"
+      @progress="onProgress($event)"
       @startPagination="startPagination()"
       @hasPaginated="hasPaginated()"
-      @beforeDownload="onBeforeDownload($event)"
-      @hasGenerated="hasGenerated($event)"
+      @beforeDownload="beforeDownload($event)"
+      @hasDownloaded="hasDownloaded($event)"
       ref="html2Pdf"
     >
       <pdf-content @domRendered="domRendered()" slot="pdf-content" />
@@ -156,9 +156,9 @@ export default {
       console.log(`PDF has been paginated`)
     },
 
-    beforeGenerate ({ html2pdf, options, pdfContent }) {
+    async beforeDownload ({ html2pdf, options, pdfContent }) {
       console.log(`On Before PDF Generation`)
-      // let pdfBlobUrl = await html2pdf().set(options).from(element).toPdf().get('pdf').then((pdf) => {
+      // await html2pdf().set(options).from(pdfContent).toPdf().get('pdf').then((pdf) => {
 			// 	const totalPages = pdf.internal.getNumberOfPages()
 			// 	for (let i = 1; i <= totalPages; i++) {
 			// 		pdf.setPage(i)
@@ -166,12 +166,10 @@ export default {
 			// 		pdf.setTextColor(150)
 			// 		pdf.text('Page ' + i + ' of ' + totalPages, (pdf.internal.pageSize.getWidth() * 0.88), (pdf.internal.pageSize.getHeight() - 0.3))
 			// 	} 
-			// }).output('bloburl')
-
-			// this.pdfFile = pdfBlobUrl
+			// }).save()
     },
 
-    hasGenerated(blobPdf) {
+    hasDownloaded (blobPdf) {
       console.log(`PDF has downloaded yehey`)
       this.pdfDownloaded = true
       console.log(blobPdf)
