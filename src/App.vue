@@ -14,8 +14,10 @@
       :manual-pagination="controlValue.manualPagination"
       :html-to-pdf-options="htmlToPdfOptions"
       @progress="onProgress($event)"
-      @hasStartedGeneration="hasStartedGeneration()"
-      @hasGenerated="hasGenerated($event)"
+      @startPagination="startPagination()"
+      @hasPaginated="hasPaginated()"
+      @beforeDownload="beforeDownload($event)"
+      @hasDownloaded="hasDownloaded($event)"
       ref="html2Pdf"
     >
       <pdf-content @domRendered="domRendered()" slot="pdf-content" />
@@ -56,7 +58,7 @@ export default {
       return {
         margin: 0,
 
-        filename: "hehe.pdf",
+        filename: "hee hee.pdf",
 
         image: {
           type: "jpeg",
@@ -143,17 +145,34 @@ export default {
 
     onProgress(progress) {
       this.progress = progress;
-      console.log(`PDF generation progress: ${progress}%`);
+      console.log(`PDF generation progress: ${progress}%`)
     },
 
-    hasStartedGeneration() {
-      console.log(`PDF has started generation`);
+    startPagination() {
+      console.log(`PDF has started pagination`)
     },
 
-    hasGenerated(blobPdf) {
-      this.pdfDownloaded = true;
-      console.log(`PDF has downloaded yehey`);
-      console.log(blobPdf);
+    hasPaginated () {
+      console.log(`PDF has been paginated`)
+    },
+
+    async beforeDownload ({ html2pdf, options, pdfContent }) {
+      console.log(`On Before PDF Generation`)
+      // await html2pdf().set(options).from(pdfContent).toPdf().get('pdf').then((pdf) => {
+			// 	const totalPages = pdf.internal.getNumberOfPages()
+			// 	for (let i = 1; i <= totalPages; i++) {
+			// 		pdf.setPage(i)
+			// 		pdf.setFontSize(10)
+			// 		pdf.setTextColor(150)
+			// 		pdf.text('Page ' + i + ' of ' + totalPages, (pdf.internal.pageSize.getWidth() * 0.88), (pdf.internal.pageSize.getHeight() - 0.3))
+			// 	} 
+			// }).save()
+    },
+
+    hasDownloaded (blobPdf) {
+      console.log(`PDF has downloaded yehey`)
+      this.pdfDownloaded = true
+      console.log(blobPdf)
     },
 
     domRendered() {
