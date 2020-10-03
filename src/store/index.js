@@ -9,8 +9,8 @@ export default new Vuex.Store({
         controlValue: {
             showLayout: false,
             floatLayout: true,
-            enableDownload: false,
-            previewModal: false,
+            enableDownload: true,
+            previewModal: true,
             paginateElementsByHeight: 1100,
             manualPagination: false,
             filename: 'Hee Hee',
